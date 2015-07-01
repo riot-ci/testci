@@ -1,0 +1,29 @@
+## the cpu to build for
+export CPU = stm32f1
+export CPU_MODEL = stm32f103cb
+
+# set the default port
+export PORT ?= /dev/ttyUSB0
+
+#
+export BINFILE = $(patsubst %.elf,%.bin,$(ELFFILE))
+
+export FLASHER = dfu-util
+export DEBUGGER = # spark core has no debugger
+export RESET = # dfu-util has no support for resetting the device
+
+export OFLAGS = -O binary
+export FFLAGS = -d 1d50:607f -a 0 -s 0x08005000:leave -D "$(HEXFILE)"
+export TERMFLAGS = -p $(PORT)
+
+# export board specific includes to the global includes-listing
+export INCLUDES += -I$(RIOTBASE)/drivers/at86rf231/include -I$(RIOTBASE)/sys/net/include
+
+# setup serial terminal
+include $(RIOTBOARD)/Makefile.include.serial
+
+# this board uses openocd
+include $(RIOTBOARD)/Makefile.include.openocd
+
+# include cortex defaults
+include $(RIOTBOARD)/Makefile.include.cortexm_common

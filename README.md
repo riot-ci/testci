@@ -1,4 +1,5 @@
-                          ZZZZZZ
+                          foo
+							ZZZZZZ
                         ZZZZZZZZZZZZ
                       ZZZZZZZZZZZZZZZZ
                      ZZZZZZZ     ZZZZZZ
